@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
+import { CreateLoadDialog } from './create-load-dialog';
 import { FiltersDropdown } from './filters-dropdown';
-import { LoadActionDialog } from './load-action-dialog';
 import { SearchInput } from './search-input';
 import { LoadsWrapperProps } from './types';
 
@@ -22,9 +22,9 @@ const TABLE_COLUMNS: { key: keyof Load; label: string }[] = [
 ];
 
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
-  const { 
-    paginatedLoads, 
-    isLoading, 
+  const {
+    paginatedLoads,
+    isLoading,
     error,
     sortConfig,
     handleSort,
@@ -56,41 +56,41 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
           <SearchInput />
           <FiltersDropdown />
         </div>
-        <LoadActionDialog />
+        <CreateLoadDialog />
       </div>
-      
+
       <div className='overflow-x-auto'>
-          <table className='w-full'>
-            <thead>
-              <tr className='border-b border-slate-100'>
-                {TABLE_COLUMNS.map((column) => (
-                  <SortableHeader<Load>
-                    key={column.key}
-                    label={column.label}
-                    sortKey={column.key}
-                    sortConfig={sortConfig}
-                    onSort={handleSort}
-                    className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'
-                  />
-                ))}
-              </tr>
-            </thead>
-            <tbody className='divide-y divide-slate-100'>
-              {paginatedLoads.map((load) => (
-                <tr key={load.id} className='hover:bg-slate-50 transition-colors'>
-                  <td className='py-4 px-4 text-sm text-slate-900 font-medium'>{load.id}</td>
-                  <td className='py-4 px-4'>
-                    <LoadStatusBadge status={load.status} />
-                  </td>
-                  <td className='py-4 px-4 text-sm text-slate-600'>{load.origin}</td>
-                  <td className='py-4 px-4 text-sm text-slate-600'>{load.destination}</td>
-                  <td className='py-4 px-4 text-sm text-slate-600'>{load.client_name}</td>
-                  <td className='py-4 px-4 text-sm text-slate-600'>{load.carrier_name}</td>
-                </tr>
+        <table className='w-full'>
+          <thead>
+            <tr className='border-b border-slate-100'>
+              {TABLE_COLUMNS.map((column) => (
+                <SortableHeader<Load>
+                  key={column.key}
+                  label={column.label}
+                  sortKey={column.key}
+                  sortConfig={sortConfig}
+                  onSort={handleSort}
+                  className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'
+                />
               ))}
-            </tbody>
-          </table>
-        </div>
+            </tr>
+          </thead>
+          <tbody className='divide-y divide-slate-100'>
+            {paginatedLoads.map((load) => (
+              <tr key={load.id} className='hover:bg-slate-50 transition-colors'>
+                <td className='py-4 px-4 text-sm text-slate-900 font-medium'>{load.id}</td>
+                <td className='py-4 px-4'>
+                  <LoadStatusBadge status={load.status} />
+                </td>
+                <td className='py-4 px-4 text-sm text-slate-600'>{load.origin}</td>
+                <td className='py-4 px-4 text-sm text-slate-600'>{load.destination}</td>
+                <td className='py-4 px-4 text-sm text-slate-600'>{load.client_name}</td>
+                <td className='py-4 px-4 text-sm text-slate-600'>{load.carrier_name}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
       <Pagination />
     </div>

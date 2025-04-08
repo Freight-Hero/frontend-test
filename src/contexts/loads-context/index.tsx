@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect, useCallback } from 'react'
+import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect } from 'react'
 
 import { LoadsContextProps } from './types'
 
@@ -16,16 +16,16 @@ const LoadsContext = createContext<LoadsContextProps>({
   loads: [],
   isLoading: false,
   error: null,
-  deleteLoad: () => {},
+  deleteLoad: () => { },
   currentPage: 1,
   totalPages: 1,
-  setCurrentPage: () => {},
+  setCurrentPage: () => { },
   paginatedLoads: [],
   searchQuery: '',
-  setSearchQuery: () => {},
+  setSearchQuery: () => { },
   sortConfig: { key: 'id', direction: 'asc' },
-  handleSort: () => {},
-  setLoads: () => {},
+  handleSort: () => { },
+  setLoads: () => { },
 })
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
@@ -34,9 +34,9 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   const [searchQuery, setSearchQuery] = useState('')
   const [sortConfig, setSortConfig] = useState<SortConfig<Load>>({ key: 'id', direction: 'asc' })
 
-  const deleteLoad = useCallback((id: number) => {
+  const deleteLoad = (id: number) => {
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
-  }, [setLoads])
+  }
 
   const handleSort = (key: keyof Load) => {
     setSortConfig(current => ({
@@ -45,22 +45,22 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
     }))
   }
 
-  const filteredLoads = useMemo(() => 
+  const filteredLoads = useMemo(() =>
     filterLoads(loads, searchQuery),
     [loads, searchQuery]
   )
 
-  const sortedLoads = useMemo(() => 
+  const sortedLoads = useMemo(() =>
     sortLoads(filteredLoads, sortConfig),
     [filteredLoads, sortConfig]
   )
 
-  const totalPages = useMemo(() => 
+  const totalPages = useMemo(() =>
     calculateTotalPages(sortedLoads.length, ITEMS_PER_PAGE),
     [sortedLoads.length]
   )
 
-  const paginatedLoads = useMemo(() => 
+  const paginatedLoads = useMemo(() =>
     paginateLoads(sortedLoads, currentPage, ITEMS_PER_PAGE),
     [sortedLoads, currentPage]
   )
@@ -86,7 +86,8 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       handleSort,
       setLoads,
     }),
-    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig, setLoads, deleteLoad]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig, setLoads]
   )
 
   return (
