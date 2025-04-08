@@ -34,8 +34,8 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
           <Search className='w-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2' />
           <Input className='pl-11' name='search' placeholder='Search' /> 
         </div>
-        <Button>
-          <ListFilter className='w-5 text-slate-400' />
+        <Button variant='ghost'>
+          <ListFilter className='w-4 text-slate-400' />
           Filters
         </Button>
       </div>
