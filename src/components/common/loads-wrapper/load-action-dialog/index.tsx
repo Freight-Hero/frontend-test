@@ -28,7 +28,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export const LoadActionDialog: FC = () => {
   const { loads, setLoads } = useLoadsContext();
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -52,11 +52,11 @@ export const LoadActionDialog: FC = () => {
 
     setLoads(prevLoads => [newLoad, ...prevLoads]);
     form.reset();
-    setOpen(false);
+    setIsOpen(false);
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="cta">
           <PlusIcon className="mr-2 h-4 w-4" />
@@ -149,7 +149,7 @@ export const LoadActionDialog: FC = () => {
             <div className="flex justify-end space-x-2">
               <Button type="button" variant="outline" onClick={() => {
                 form.reset();
-                setOpen(false);
+                setIsOpen(false);
               }}>
                 Cancel
               </Button>
