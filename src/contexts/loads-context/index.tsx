@@ -1,5 +1,3 @@
-'use client'
-
 import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect } from 'react'
 import { LoadsContextProps } from './types'
 import { Load } from '@/types/load'
@@ -26,6 +24,8 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   useEffect(() => {
     const fetchLoads = async () => {
       try {
+        /** Add fake delay to simulate loading */
+        await new Promise(resolve => setTimeout(resolve, 1500));
         const response = await fetch('/loads-mock.json')
         const data = await response.json()
         setLoads(data.loads)
