@@ -4,7 +4,7 @@ import { useLoadsContext } from '@/contexts/LoadsContext';
 import { LoadStatusBadge } from '@/components/ui/LoadStatusBadge';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/button';
-import { ListFilter, PlusIcon, Search } from 'lucide-react';
+import { ListFilter, Search } from 'lucide-react';
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
   const { loads, isLoading, error } = useLoadsContext();
 
@@ -31,8 +31,8 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
     <div className='bg-white rounded-sm p-5 shadow-sm border border-slate-100 w-full'>
       <div className="p-4 flex justify-between items-center">
         <div className="flex relative">
-          <Search className='w-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2' />
-          <Input className='border-none pl-11' name='search' placeholder='Search' /> 
+          <Search className='w-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2' />
+          <Input className='pl-11' name='search' placeholder='Search' /> 
         </div>
         <Button>
           <ListFilter className='w-5 text-slate-400' />
