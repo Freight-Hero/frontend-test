@@ -5,6 +5,7 @@ import { useLoadsContext } from '@/contexts/loads-context';
 
 export const Pagination: FC = () => {
   const { 
+    loads,
     currentPage,
     totalPages,
     setCurrentPage
@@ -17,7 +18,7 @@ export const Pagination: FC = () => {
       <p className="text-sm text-slate-500">
         Showing <span className="font-medium">{(currentPage - 1) * 10 + 1}</span> to{' '}
         <span className="font-medium">{Math.min(currentPage * 10, totalPages * 10)}</span> of{' '}
-        <span className="font-medium">{totalPages * 10}</span> results
+        <span className="font-medium">{loads.length}</span> results
       </p>
       <nav className="isolate inline-flex items-center" aria-label="Pagination">
           <button

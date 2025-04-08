@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect } from 'react'
+import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect, useCallback } from 'react'
 
 import { LoadsContextProps } from './types'
 
@@ -34,9 +34,9 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   const [searchQuery, setSearchQuery] = useState('')
   const [sortConfig, setSortConfig] = useState<SortConfig<Load>>({ key: 'id', direction: 'asc' })
 
-  const deleteLoad = (id: number) => {
+  const deleteLoad = useCallback((id: number) => {
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
-  }
+  }, [setLoads])
 
   const handleSort = (key: keyof Load) => {
     setSortConfig(current => ({
@@ -86,7 +86,7 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       handleSort,
       setLoads,
     }),
-    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig, setLoads]
+    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig, setLoads, deleteLoad]
   )
 
   return (
