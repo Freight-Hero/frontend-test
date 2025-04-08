@@ -4,6 +4,9 @@ import { useLoadsData } from '@/hooks/useLoadsData'
 import { filterLoads } from '@/utils/loads-context/filter-loads'
 import { calculateTotalPages } from '@/utils/loads-context/calculate-total-pages'
 import { paginateLoads } from '@/utils/loads-context/paginate-loads'
+import { sortLoads } from '@/utils/loads-context/sort-loads'
+import { SortConfig } from '@/types/sorting'
+import { Load } from '@/types/load'
 
 const ITEMS_PER_PAGE = 10
 
@@ -18,15 +21,25 @@ const LoadsContext = createContext<LoadsContextProps>({
   paginatedLoads: [],
   searchQuery: '',
   setSearchQuery: () => {},
+  sortConfig: { key: 'id', direction: 'asc' },
+  handleSort: () => {},
 })
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { loads, isLoading, error, setLoads } = useLoadsData()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
+  const [sortConfig, setSortConfig] = useState<SortConfig<Load>>({ key: 'id', direction: 'asc' })
 
   const deleteLoad = (id: number) => {
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
+  }
+
+  const handleSort = (key: keyof Load) => {
+    setSortConfig(current => ({
+      key,
+      direction: current.key === key && current.direction === 'asc' ? 'desc' : 'asc'
+    }))
   }
 
   const filteredLoads = useMemo(() => 
@@ -34,24 +47,29 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
     [loads, searchQuery]
   )
 
+  const sortedLoads = useMemo(() => 
+    sortLoads(filteredLoads, sortConfig),
+    [filteredLoads, sortConfig]
+  )
+
   const totalPages = useMemo(() => 
-    calculateTotalPages(filteredLoads.length, ITEMS_PER_PAGE),
-    [filteredLoads.length]
+    calculateTotalPages(sortedLoads.length, ITEMS_PER_PAGE),
+    [sortedLoads.length]
   )
 
   const paginatedLoads = useMemo(() => 
-    paginateLoads(filteredLoads, currentPage, ITEMS_PER_PAGE),
-    [filteredLoads, currentPage]
+    paginateLoads(sortedLoads, currentPage, ITEMS_PER_PAGE),
+    [sortedLoads, currentPage]
   )
 
-  // Reset current page when search query changes
+  // Reset current page when search query or sort changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery])
+  }, [searchQuery, sortConfig])
 
   const value = useMemo(
     () => ({
-      loads: filteredLoads,
+      loads: sortedLoads,
       isLoading,
       error,
       deleteLoad,
@@ -61,8 +79,10 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       paginatedLoads,
       searchQuery,
       setSearchQuery,
+      sortConfig,
+      handleSort,
     }),
-    [filteredLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery]
+    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig]
   )
 
   return (

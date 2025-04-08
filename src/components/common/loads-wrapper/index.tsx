@@ -5,14 +5,25 @@ import { LoadsWrapperProps } from './types';
 import { LoadStatusBadge } from '@/components/ui/load-status-badge';
 import { SearchInput } from './search-input';
 import { FiltersDropdown } from './filters-dropdown';
-import { EllipsisVertical } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { SortableHeader } from '@/components/ui/table/sortable-header';
+import { Load } from '@/types/load';
+
+const TABLE_COLUMNS: { key: keyof Load; label: string }[] = [
+  { key: 'id', label: 'Load ID' },
+  { key: 'status', label: 'Status' },
+  { key: 'origin', label: 'Origin' },
+  { key: 'destination', label: 'Destination' },
+  { key: 'client_name', label: 'Client' },
+  { key: 'carrier_name', label: 'Carrier' },
+];
 
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
   const { 
     paginatedLoads, 
     isLoading, 
-    error, 
+    error,
+    sortConfig,
+    handleSort,
   } = useLoadsContext();
 
   if (isLoading) {
@@ -45,12 +56,16 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
           <table className='w-full'>
             <thead>
               <tr className='border-b border-slate-100'>
-                <th className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'>Load ID</th>
-                <th className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'>Status</th>
-                <th className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'>Origin</th>
-                <th className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'>Destination</th>
-                <th className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'>Client</th>
-                <th className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'>Carrier</th>
+                {TABLE_COLUMNS.map((column) => (
+                  <SortableHeader<Load>
+                    key={column.key}
+                    label={column.label}
+                    sortKey={column.key}
+                    sortConfig={sortConfig}
+                    onSort={handleSort}
+                    className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'
+                  />
+                ))}
               </tr>
             </thead>
             <tbody className='divide-y divide-slate-100'>
