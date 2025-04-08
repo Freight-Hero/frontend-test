@@ -56,7 +56,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
           <SearchInput />
           <FiltersDropdown />
         </div>
-        <LoadActionDialog />
+        <LoadActionDialog onSubmit={() => {}} />
       </div>
       
       <div className='overflow-x-auto'>
