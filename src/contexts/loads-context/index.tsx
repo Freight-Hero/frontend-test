@@ -13,6 +13,8 @@ const LoadsContext = createContext<LoadsContextProps>({
   totalPages: 1,
   setCurrentPage: () => {},
   paginatedLoads: [],
+  searchQuery: '',
+  setSearchQuery: () => {},
 })
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
@@ -20,6 +22,7 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
   const [currentPage, setCurrentPage] = useState(1)
+  const [searchQuery, setSearchQuery] = useState('')
 
   useEffect(() => {
     const fetchLoads = async () => {
@@ -43,15 +46,27 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
   }
 
-  const totalPages = Math.ceil(loads.length / ITEMS_PER_PAGE)
-  const paginatedLoads = loads.slice(
+  const filteredLoads = useMemo(() => {
+    if (!searchQuery) return loads
+    return loads.filter(load => 
+      load.id.toString().includes(searchQuery) ||
+      load.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      load.origin.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      load.destination.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      load.client_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      load.carrier_name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  }, [loads, searchQuery])
+
+  const totalPages = Math.ceil(filteredLoads.length / ITEMS_PER_PAGE)
+  const paginatedLoads = filteredLoads.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   )
 
   const value = useMemo(
     () => ({
-      loads,
+      loads: filteredLoads,
       isLoading,
       error,
       deleteLoad,
@@ -59,8 +74,10 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       totalPages,
       setCurrentPage,
       paginatedLoads,
+      searchQuery,
+      setSearchQuery,
     }),
-    [loads, isLoading, error, currentPage, totalPages, paginatedLoads]
+    [filteredLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery]
   )
 
   return (

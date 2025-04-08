@@ -9,4 +9,6 @@ export interface LoadsContextProps {
   totalPages: number;
   setCurrentPage: (page: number) => void;
   paginatedLoads: Load[];
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 } 
