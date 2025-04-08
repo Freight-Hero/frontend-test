@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { LoadsWrapperProps } from './types';
-import { useLoadsContext } from '@/contexts/LoadsContext';
-import { LoadStatusBadge } from '@/components/ui/LoadStatusBadge';
-import { Input } from '@/components/ui/Input';
+import { useLoadsContext } from '@/contexts/loads-context';
+import { LoadStatusBadge } from '@/components/ui/load-status-badge';
+import { Input } from '@/components/ui/InputRename';
 import { Button } from '@/components/ui/button';
 import { ListFilter, Search } from 'lucide-react';
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {

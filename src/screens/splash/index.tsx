@@ -1,6 +1,6 @@
 import logo from '@assets/logo.svg';
 import { SplashScreenProps } from './types';
-import { LoadsWrapper } from '@/components/common/LoadsWrapper';
+import { LoadsWrapper } from '@/components/common/loads-wrapper';
 
 
 export const SplashScreen: React.FC<SplashScreenProps> = () => {
