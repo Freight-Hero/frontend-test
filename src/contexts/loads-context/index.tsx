@@ -64,6 +64,11 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
     currentPage * ITEMS_PER_PAGE
   )
 
+  // Reset current page when search query changes
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery])
+
   const value = useMemo(
     () => ({
       loads: filteredLoads,

@@ -11,6 +11,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = () => {
         <p className='text-slate-500 text-sm font-extralight'>load management</p>
       </div>
       <LoadsWrapper />
+      <p className='text-slate-500 text-sm font-extralight'>©2025 FreightHero. All Rights Reserved. Privacy Policy.</p>
     </div>
   );
 };
