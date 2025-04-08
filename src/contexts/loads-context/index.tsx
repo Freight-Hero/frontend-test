@@ -1,6 +1,9 @@
 import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect } from 'react'
 import { LoadsContextProps } from './types'
-import { Load } from '@/types/load'
+import { useLoadsData } from '@/hooks/useLoadsData'
+import { filterLoads } from '@/utils/loads-context/filter-loads'
+import { calculateTotalPages } from '@/utils/loads-context/calculate-total-pages'
+import { paginateLoads } from '@/utils/loads-context/paginate-loads'
 
 const ITEMS_PER_PAGE = 10
 
@@ -18,50 +21,27 @@ const LoadsContext = createContext<LoadsContextProps>({
 })
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const [loads, setLoads] = useState<Load[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState<Error | null>(null)
+  const { loads, isLoading, error, setLoads } = useLoadsData()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
-
-  useEffect(() => {
-    const fetchLoads = async () => {
-      try {
-        /** Add fake delay to simulate loading */
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        const response = await fetch('/loads-mock.json')
-        const data = await response.json()
-        setLoads(data.loads)
-      } catch (err) {
-        setError(err as Error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchLoads()
-  }, [])
 
   const deleteLoad = (id: number) => {
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
   }
 
-  const filteredLoads = useMemo(() => {
-    if (!searchQuery) return loads
-    return loads.filter(load => 
-      load.id.toString().includes(searchQuery) ||
-      load.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      load.origin.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      load.destination.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      load.client_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      load.carrier_name.toLowerCase().includes(searchQuery.toLowerCase())
-    )
-  }, [loads, searchQuery])
+  const filteredLoads = useMemo(() => 
+    filterLoads(loads, searchQuery),
+    [loads, searchQuery]
+  )
 
-  const totalPages = Math.ceil(filteredLoads.length / ITEMS_PER_PAGE)
-  const paginatedLoads = filteredLoads.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+  const totalPages = useMemo(() => 
+    calculateTotalPages(filteredLoads.length, ITEMS_PER_PAGE),
+    [filteredLoads.length]
+  )
+
+  const paginatedLoads = useMemo(() => 
+    paginateLoads(filteredLoads, currentPage, ITEMS_PER_PAGE),
+    [filteredLoads, currentPage]
   )
 
   // Reset current page when search query changes
