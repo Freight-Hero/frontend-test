@@ -5,4 +5,8 @@ export interface LoadsContextProps {
   isLoading: boolean;
   error: Error | null;
   deleteLoad: (id: number) => void;
-}
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: (page: number) => void;
+  paginatedLoads: Load[];
+} 

@@ -4,17 +4,24 @@ import { createContext, PropsWithChildren, useContext, useMemo, useState, useEff
 import { LoadsContextProps } from './types'
 import { Load } from '@/types/load'
 
+const ITEMS_PER_PAGE = 10
+
 const LoadsContext = createContext<LoadsContextProps>({
   loads: [],
   isLoading: false,
   error: null,
   deleteLoad: () => {},
+  currentPage: 1,
+  totalPages: 1,
+  setCurrentPage: () => {},
+  paginatedLoads: [],
 })
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [loads, setLoads] = useState<Load[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<Error | null>(null)
+  const [currentPage, setCurrentPage] = useState(1)
 
   useEffect(() => {
     const fetchLoads = async () => {
@@ -36,14 +43,24 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
   }
 
+  const totalPages = Math.ceil(loads.length / ITEMS_PER_PAGE)
+  const paginatedLoads = loads.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
+
   const value = useMemo(
     () => ({
       loads,
       isLoading,
       error,
       deleteLoad,
+      currentPage,
+      totalPages,
+      setCurrentPage,
+      paginatedLoads,
     }),
-    [loads, isLoading, error]
+    [loads, isLoading, error, currentPage, totalPages, paginatedLoads]
   )
 
   return (
@@ -53,4 +70,4 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
 
 export const useLoadsContext = () => {
   return useContext(LoadsContext)
-}
+} 

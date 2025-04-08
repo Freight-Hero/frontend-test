@@ -17,7 +17,8 @@ export default {
   		colors: {
   			primary: {
   				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
+  				foreground: 'hsl(var(--primary-foreground))',
+					brand: '#f60'
   			},
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

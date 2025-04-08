@@ -1,16 +1,20 @@
 import { FC } from 'react';
-import { LoadsWrapperProps } from './types';
+import { Pagination } from '@/components/ui/pagination';
 import { useLoadsContext } from '@/contexts/loads-context';
+import { LoadsWrapperProps } from './types';
 import { LoadStatusBadge } from '@/components/ui/load-status-badge';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { ListFilter, Search } from 'lucide-react';
+
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
-  const { loads, isLoading, error } = useLoadsContext();
+  const { 
+    paginatedLoads, 
+    isLoading, 
+    error, 
+    deleteLoad,
+  } = useLoadsContext();
 
   if (isLoading) {
     return (
-      <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full p-4'>
+      <div className='bg-white rounded-xl shadow-sm border border-slate-100 w-full p-6'>
         <div className='animate-pulse space-y-4'>
           <div className='h-4 bg-slate-200 rounded w-1/4'></div>
           <div className='h-4 bg-slate-200 rounded w-1/2'></div>
@@ -21,27 +25,20 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
 
   if (error) {
     return (
-      <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full p-4'>
+      <div className='bg-white rounded-xl shadow-sm border border-slate-100 w-full p-6'>
         <div className='text-red-500'>Error loading loads: {error.message}</div>
       </div>
     );
   }
 
   return (
-    <div className='bg-white rounded-sm p-5 shadow-sm border border-slate-100 w-full'>
-      <div className="p-4 flex justify-between items-center">
-        <div className="flex relative">
-          <Search className='w-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2' />
-          <Input className='pl-11' name='search' placeholder='Search' /> 
-        </div>
-        <Button variant='ghost'>
-          <ListFilter className='w-4 text-slate-400' />
-          Filters
-        </Button>
+    <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full overflow-hidden flex flex-col gap-4'>
+      <div className='p-4'>
+        <h2 className='text-2xl font-semibold text-slate-900'>Load Management</h2>
+        <p className='text-slate-500 mt-1'>Track and manage your loads efficiently</p>
       </div>
       
-      <div className='p-4'>
-        <div className='overflow-x-auto'>
+      <div className='overflow-x-auto'>
           <table className='w-full'>
             <thead>
               <tr className='border-b border-slate-100'>
@@ -55,7 +52,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
               </tr>
             </thead>
             <tbody className='divide-y divide-slate-100'>
-              {loads.map((load) => (
+              {paginatedLoads.map((load) => (
                 <tr key={load.id} className='hover:bg-slate-50 transition-colors'>
                   <td className='py-4 px-4 text-sm text-slate-900 font-medium'>{load.id}</td>
                   <td className='py-4 px-4'>
@@ -80,7 +77,8 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
             </tbody>
           </table>
         </div>
-      </div>
+
+      <Pagination />
     </div>
   );
-};
+}; 
