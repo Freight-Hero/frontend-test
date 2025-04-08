@@ -28,7 +28,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
 
   if (isLoading) {
     return (
-      <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full p-6'>
+      <div className='bg-white rounded-sm border border-slate-100 w-full p-6'>
         <div className='animate-pulse space-y-4'>
           <div className='h-4 bg-slate-200 rounded w-1/4'></div>
           <div className='h-4 bg-slate-200 rounded w-1/2'></div>
@@ -39,14 +39,14 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
 
   if (error) {
     return (
-      <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full p-6'>
+      <div className='bg-white rounded-sm border border-slate-100 w-full p-6'>
         <div className='text-red-500'>Error loading loads: {error.message}</div>
       </div>
     );
   }
 
   return (
-    <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full overflow-hidden flex flex-col gap-4'>
+    <div className='bg-white rounded-sm border border-slate-100 w-full overflow-hidden flex flex-col gap-4'>
       <div className='p-4 flex items-center justify-between'>
         <SearchInput />
         <FiltersDropdown />

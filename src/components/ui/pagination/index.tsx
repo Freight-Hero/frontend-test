@@ -38,7 +38,7 @@ export const Pagination: FC = () => {
           </p>
         </div>
         <div>
-          <nav className="isolate inline-flex -space-x-px rounded-sm shadow-sm" aria-label="Pagination">
+          <nav className="isolate inline-flex -space-x-px rounded-sm" aria-label="Pagination">
             <button
               onClick={() => setCurrentPage(currentPage - 1)}
               disabled={currentPage === 1}
