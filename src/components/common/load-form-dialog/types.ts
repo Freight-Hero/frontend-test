@@ -11,4 +11,5 @@ export interface LoadFormDialogProps {
   isOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
   mode?: 'create' | 'edit';
+  onDelete?: () => void;
 }
