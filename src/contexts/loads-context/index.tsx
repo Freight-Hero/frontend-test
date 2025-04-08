@@ -2,7 +2,7 @@ import { createContext, PropsWithChildren, useContext, useMemo, useState, useEff
 
 import { LoadsContextProps } from './types'
 
-import { useLoadsData } from '@/hooks/useLoadsData'
+import { useLoadsData } from '@/hooks/use-loads-data'
 import { Load } from '@/types/load'
 import { SortConfig } from '@/types/sorting'
 import { calculateTotalPages } from '@/utils/loads-context/calculate-total-pages'
@@ -24,6 +24,8 @@ const LoadsContext = createContext<LoadsContextProps>({
   paginatedLoads: [],
   searchQuery: '',
   setSearchQuery: () => { },
+  statusFilter: '',
+  setStatusFilter: () => { },
   sortConfig: { key: 'id', direction: 'asc' },
   handleSort: () => { },
   setLoads: () => { },
@@ -33,6 +35,7 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   const { loads, isLoading, error, setLoads } = useLoadsData()
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
+  const [statusFilter, setStatusFilter] = useState('')
   const [sortConfig, setSortConfig] = useState<SortConfig<Load>>({ key: 'id', direction: 'asc' })
 
   const deleteLoad = (id: number) => {
@@ -51,8 +54,8 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   }
 
   const filteredLoads = useMemo(() =>
-    filterLoads(loads, searchQuery),
-    [loads, searchQuery]
+    filterLoads(loads, searchQuery, statusFilter),
+    [loads, searchQuery, statusFilter]
   )
 
   const sortedLoads = useMemo(() =>
@@ -70,10 +73,10 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
     [sortedLoads, currentPage]
   )
 
-  // Reset current page when search query or sort changes
+  // Reset current page when search query, status filter or sort changes
   useEffect(() => {
     setCurrentPage(1)
-  }, [searchQuery, sortConfig])
+  }, [searchQuery, statusFilter, sortConfig])
 
   const value = useMemo(
     () => ({
@@ -88,12 +91,14 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       paginatedLoads,
       searchQuery,
       setSearchQuery,
+      statusFilter,
+      setStatusFilter,
       sortConfig,
       handleSort,
       setLoads,
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig, setLoads]
+    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, statusFilter, sortConfig, setLoads]
   )
 
   return (

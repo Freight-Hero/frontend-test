@@ -13,6 +13,8 @@ export interface LoadsContextProps {
   paginatedLoads: Load[];
   searchQuery: string;
   setSearchQuery: (query: string) => void;
+  statusFilter: string;
+  setStatusFilter: (status: string) => void;
   sortConfig: SortConfig<Load>;
   handleSort: (key: keyof Load) => void;
   setLoads: (loads: Load[] | ((prevLoads: Load[]) => Load[])) => void;
