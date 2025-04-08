@@ -52,8 +52,10 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
   return (
     <div className='bg-white rounded-sm border border-slate-100 w-full overflow-hidden flex flex-col gap-4'>
       <div className='p-4 flex items-center justify-between'>
-        <SearchInput />
-        <FiltersDropdown />
+        <div className="flex gap-4">
+          <SearchInput />
+          <FiltersDropdown />
+        </div>
         <LoadActionDialog />
       </div>
       
