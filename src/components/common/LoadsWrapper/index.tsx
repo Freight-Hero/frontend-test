@@ -2,13 +2,15 @@ import { FC } from 'react';
 import { LoadsWrapperProps } from './types';
 import { useLoadsContext } from '@/contexts/LoadsContext';
 import { LoadStatusBadge } from '@/components/ui/LoadStatusBadge';
-
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/button';
+import { ListFilter, PlusIcon, Search } from 'lucide-react';
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
   const { loads, isLoading, error } = useLoadsContext();
 
   if (isLoading) {
     return (
-      <div className='bg-white rounded-xl shadow-sm border border-slate-100 w-full p-6'>
+      <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full p-4'>
         <div className='animate-pulse space-y-4'>
           <div className='h-4 bg-slate-200 rounded w-1/4'></div>
           <div className='h-4 bg-slate-200 rounded w-1/2'></div>
@@ -19,20 +21,26 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
 
   if (error) {
     return (
-      <div className='bg-white rounded-xl shadow-sm border border-slate-100 w-full p-6'>
+      <div className='bg-white rounded-sm shadow-sm border border-slate-100 w-full p-4'>
         <div className='text-red-500'>Error loading loads: {error.message}</div>
       </div>
     );
   }
 
   return (
-    <div className='bg-white rounded-xl shadow-sm border border-slate-100 w-full'>
-      <div className='p-6 border-b border-slate-100'>
-        <h2 className='text-2xl font-semibold text-slate-900'>Load Management</h2>
-        <p className='text-slate-500 mt-1'>Track and manage your loads efficiently</p>
+    <div className='bg-white rounded-sm p-5 shadow-sm border border-slate-100 w-full'>
+      <div className="p-4 flex justify-between items-center">
+        <div className="flex relative">
+          <Search className='w-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2' />
+          <Input className='border-none pl-11' name='search' placeholder='Search' /> 
+        </div>
+        <Button>
+          <ListFilter className='w-5 text-slate-400' />
+          Filters
+        </Button>
       </div>
       
-      <div className='p-6'>
+      <div className='p-4'>
         <div className='overflow-x-auto'>
           <table className='w-full'>
             <thead>
