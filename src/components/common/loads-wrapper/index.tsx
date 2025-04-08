@@ -82,7 +82,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
             {paginatedLoads.map((load) => (
               <tr
                 key={load.id}
-                className='hover:bg-slate-50 transition-colors cursor-pointer'
+                className='hover:bg-slate-50 cursor-pointer'
                 onClick={() => setSelectedLoad(load)}
               >
                 <td className='py-4 px-4 text-sm text-slate-900 font-medium'>{load.id}</td>
