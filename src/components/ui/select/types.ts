@@ -9,7 +9,6 @@ import {
   selectSeparatorVariants 
 } from "./variants"
 
-
 export type SelectTriggerProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & 
   VariantProps<typeof selectTriggerVariants>
 
@@ -23,4 +22,4 @@ export type SelectItemProps = React.ComponentPropsWithoutRef<typeof SelectPrimit
   VariantProps<typeof selectItemVariants>
 
 export type SelectSeparatorProps = React.ComponentPropsWithoutRef<typeof SelectPrimitive.Separator> & 
-  VariantProps<typeof selectSeparatorVariants> 
+  VariantProps<typeof selectSeparatorVariants>
