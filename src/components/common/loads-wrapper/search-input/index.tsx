@@ -1,5 +1,6 @@
-import { FC, ChangeEvent } from 'react'
 import { Search } from 'lucide-react'
+import { FC, ChangeEvent } from 'react'
+
 import { Input } from '@/components/ui/input'
 import { useLoadsContext } from '@/contexts/loads-context'
 

@@ -1,13 +1,16 @@
 import { FC } from 'react';
+
+import { FiltersDropdown } from './filters-dropdown';
+import { LoadActionDialog } from './load-action-dialog';
+import { SearchInput } from './search-input';
+import { LoadsWrapperProps } from './types';
+
+import { SortableHeader } from '@/components/common/table/sortable-header';
+import { LoadStatusBadge } from '@/components/ui/load-status-badge';
 import { Pagination } from '@/components/ui/pagination';
 import { useLoadsContext } from '@/contexts/loads-context';
-import { LoadsWrapperProps } from './types';
-import { LoadStatusBadge } from '@/components/ui/load-status-badge';
-import { SearchInput } from './search-input';
-import { FiltersDropdown } from './filters-dropdown';
-import { SortableHeader } from '@/components/common/table/sortable-header';
 import { Load } from '@/types/load';
-import { LoadActionDialog } from './load-action-dialog';
+
 
 const TABLE_COLUMNS: { key: keyof Load; label: string }[] = [
   { key: 'id', label: 'Load ID' },

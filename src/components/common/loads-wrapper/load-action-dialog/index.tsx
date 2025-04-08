@@ -1,7 +1,8 @@
-import { DialogContent, DialogHeader } from '@/components/ui/dialog';
-import { DialogTrigger } from '@/components/ui/dialog';
 import { Dialog, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import { FC } from 'react';
+
+import { DialogContent, DialogHeader } from '@/components/ui/dialog';
+import { DialogTrigger } from '@/components/ui/dialog';
 
 
 

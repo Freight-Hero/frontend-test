@@ -1,12 +1,14 @@
 import { createContext, PropsWithChildren, useContext, useMemo, useState, useEffect } from 'react'
+
 import { LoadsContextProps } from './types'
+
 import { useLoadsData } from '@/hooks/useLoadsData'
-import { filterLoads } from '@/utils/loads-context/filter-loads'
+import { Load } from '@/types/load'
+import { SortConfig } from '@/types/sorting'
 import { calculateTotalPages } from '@/utils/loads-context/calculate-total-pages'
+import { filterLoads } from '@/utils/loads-context/filter-loads'
 import { paginateLoads } from '@/utils/loads-context/paginate-loads'
 import { sortLoads } from '@/utils/loads-context/sort-loads'
-import { SortConfig } from '@/types/sorting'
-import { Load } from '@/types/load'
 
 const ITEMS_PER_PAGE = 10
 

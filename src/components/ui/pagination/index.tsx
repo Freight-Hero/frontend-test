@@ -1,5 +1,6 @@
-import { useLoadsContext } from '@/contexts/loads-context';
 import { FC } from 'react';
+
+import { useLoadsContext } from '@/contexts/loads-context';
 
 
 export const Pagination: FC = () => {

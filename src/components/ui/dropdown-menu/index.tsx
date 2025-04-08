@@ -1,20 +1,8 @@
-import * as React from "react"
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu"
 import { Check, ChevronRight, Circle } from "lucide-react"
+import * as React from "react"
 import { ComponentRef } from "react"
 
-import { cn } from "@/lib/tailwind/cn"
-import {
-  dropdownMenuSubTriggerVariants,
-  dropdownMenuSubContentVariants,
-  dropdownMenuContentVariants,
-  dropdownMenuItemVariants,
-  dropdownMenuCheckboxItemVariants,
-  dropdownMenuRadioItemVariants,
-  dropdownMenuLabelVariants,
-  dropdownMenuSeparatorVariants,
-  dropdownMenuShortcutVariants,
-} from "./variants"
 import type {
   DropdownMenuContentProps,
   DropdownMenuItemProps,
@@ -26,6 +14,19 @@ import type {
   DropdownMenuSubTriggerProps,
   DropdownMenuSubContentProps,
 } from "./types"
+import {
+  dropdownMenuSubTriggerVariants,
+  dropdownMenuSubContentVariants,
+  dropdownMenuContentVariants,
+  dropdownMenuItemVariants,
+  dropdownMenuCheckboxItemVariants,
+  dropdownMenuRadioItemVariants,
+  dropdownMenuLabelVariants,
+  dropdownMenuSeparatorVariants,
+  dropdownMenuShortcutVariants,
+} from "./variants"
+
+import { cn } from "@/lib/tailwind/cn"
 
 const DropdownMenu = DropdownMenuPrimitive.Root
 

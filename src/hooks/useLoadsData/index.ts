@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import { Load } from '@/types/load'
 
 export const useLoadsData = () => {

@@ -1,6 +1,8 @@
 import { ChevronUp } from 'lucide-react'
-import { cn } from '@/lib/tailwind/cn'
+
 import { SortableHeaderProps } from './types'
+
+import { cn } from '@/lib/tailwind/cn'
 
 export const SortableHeader = <T,>({
   label,

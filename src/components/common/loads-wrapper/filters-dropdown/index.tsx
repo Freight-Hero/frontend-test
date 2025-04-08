@@ -1,3 +1,6 @@
+import { ListFilter, X } from "lucide-react"
+import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -12,8 +15,6 @@ import {
   DropdownMenuSubContent,
   DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
-import { ListFilter, X } from "lucide-react"
-import { useState } from "react"
 
 // Helper function to get region label
 const getRegionLabel = (value: string): string => {
