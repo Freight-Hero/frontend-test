@@ -2,19 +2,27 @@ import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { useLoadsContext } from "@/contexts/loads-context"
 
 export const FiltersDropdown = () => {
+  const { setSearchQuery } = useLoadsContext()
   const [statusFilter, setStatusFilter] = useState<string>("")
+
+  const handleFilterChange = (value: string) => {
+    setStatusFilter(value)
+    setSearchQuery(value ? `status:${value}` : "")
+  }
 
   const resetFilter = () => {
     setStatusFilter("")
+    setSearchQuery("")
   }
 
   return (
     <div className="flex items-center gap-2">
-      <Select value={statusFilter} onValueChange={setStatusFilter}>
+      <Select value={statusFilter} onValueChange={handleFilterChange}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Filter by status" />
+          <SelectValue className="text-sm" placeholder="Filter by status" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="in route">In Route</SelectItem>
