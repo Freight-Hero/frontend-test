@@ -14,14 +14,22 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
-export const LoadFormDialog: FC<LoadFormDialogProps> = ({ onSubmit, defaultValues = {
-  status: 'pick up',
-  origin: '',
-  destination: '',
-  client_name: '',
-  carrier_name: '',
-} }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const LoadFormDialog: FC<LoadFormDialogProps> = ({
+  onSubmit,
+  defaultValues = {
+    status: 'pick up',
+    origin: '',
+    destination: '',
+    client_name: '',
+    carrier_name: '',
+  },
+  isOpen: isOpenProp,
+  onOpenChange,
+  mode = 'create'
+}) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isOpen = isOpenProp ?? internalOpen;
+  const setIsOpen = onOpenChange ?? setInternalOpen;
 
   const form = useForm<LoadFormValues>({
     resolver: zodResolver(loadFormSchema),
@@ -36,17 +44,23 @@ export const LoadFormDialog: FC<LoadFormDialogProps> = ({ onSubmit, defaultValue
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button variant="cta">
-          <PlusIcon className="mr-2 h-4 w-4" />
-          Add Load
-        </Button>
-      </DialogTrigger>
+      {mode === 'create' && (
+        <DialogTrigger asChild>
+          <Button variant="cta">
+            <PlusIcon className="mr-2 h-4 w-4" />
+            Add Load
+          </Button>
+        </DialogTrigger>
+      )}
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className='text-2xl font-bold'>Add New Load</DialogTitle>
+          <DialogTitle className='text-2xl font-bold'>
+            {mode === 'create' ? 'Add New Load' : 'Edit Load'}
+          </DialogTitle>
           <DialogDescription className='text-sm text-gray-500'>
-            Fill in the details below to create a new load.
+            {mode === 'create'
+              ? 'Fill in the details below to create a new load.'
+              : 'Update the load details below.'}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -132,7 +146,9 @@ export const LoadFormDialog: FC<LoadFormDialogProps> = ({ onSubmit, defaultValue
               }}>
                 Cancel
               </Button>
-              <Button type="submit" variant="cta">Create Load</Button>
+              <Button type="submit" variant="cta">
+                {mode === 'create' ? 'Create Load' : 'Update Load'}
+              </Button>
             </div>
           </form>
         </Form>

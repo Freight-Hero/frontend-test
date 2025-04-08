@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import { CreateLoadDialog } from './create-load-dialog';
 import { FiltersDropdown } from './filters-dropdown';
+import { LoadActionDialog } from './load-action-dialog';
 import { SearchInput } from './search-input';
 import { LoadsWrapperProps } from './types';
 
@@ -29,6 +30,8 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
     sortConfig,
     handleSort,
   } = useLoadsContext();
+
+  const [selectedLoad, setSelectedLoad] = useState<Load | null>(null);
 
   if (isLoading) {
     return (
@@ -77,7 +80,11 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
           </thead>
           <tbody className='divide-y divide-slate-100'>
             {paginatedLoads.map((load) => (
-              <tr key={load.id} className='hover:bg-slate-50 transition-colors'>
+              <tr
+                key={load.id}
+                className='hover:bg-slate-50 transition-colors cursor-pointer'
+                onClick={() => setSelectedLoad(load)}
+              >
                 <td className='py-4 px-4 text-sm text-slate-900 font-medium'>{load.id}</td>
                 <td className='py-4 px-4'>
                   <LoadStatusBadge status={load.status} />
@@ -93,6 +100,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
       </div>
 
       <Pagination />
+      {selectedLoad && <LoadActionDialog load={selectedLoad} onClose={() => setSelectedLoad(null)} />}
     </div>
   );
 }; 

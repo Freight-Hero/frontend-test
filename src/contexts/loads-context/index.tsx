@@ -17,6 +17,7 @@ const LoadsContext = createContext<LoadsContextProps>({
   isLoading: false,
   error: null,
   deleteLoad: () => { },
+  updateLoad: () => { },
   currentPage: 1,
   totalPages: 1,
   setCurrentPage: () => { },
@@ -36,6 +37,10 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
 
   const deleteLoad = (id: number) => {
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
+  }
+
+  const updateLoad = (id: number, load: Load) => {
+    setLoads(prevLoads => prevLoads.map(prevLoad => prevLoad.id === id ? load : prevLoad))
   }
 
   const handleSort = (key: keyof Load) => {
@@ -76,6 +81,7 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       isLoading,
       error,
       deleteLoad,
+      updateLoad,
       currentPage,
       totalPages,
       setCurrentPage,
