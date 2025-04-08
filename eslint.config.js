@@ -33,6 +33,7 @@ export default [
       'jsx-a11y': jsxA11yPlugin
     },
     rules: {
+      '@typescript-eslint/no-empty-object-type': 'off',
       'react/react-in-jsx-scope': 'off',
       'react/prop-types': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
