@@ -167,7 +167,7 @@ export const LoadFormDialog: FC<LoadFormDialogProps> = ({
                     Delete Load
                   </Button>
                 )}
-                <Button type="submit" variant="cta">
+                <Button type="submit" variant="cta" tabIndex={0}>
                   {mode === 'create' ? 'Create Load' : 'Update Load'}
                 </Button>
               </div>
