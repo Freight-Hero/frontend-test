@@ -4,6 +4,8 @@ import { FieldPath, FieldValues } from "react-hook-form"
 
 import { formVariants, formLabelVariants, formDescriptionVariants, formMessageVariants } from "./variants"
 
+import { labelVariants } from "@/components/ui/label/variants"
+
 export type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
@@ -18,7 +20,8 @@ export type FormItemContextValue = {
 export type FormItemProps = React.HTMLAttributes<HTMLDivElement> & VariantProps<typeof formVariants>
 
 export type FormLabelProps = React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root> & 
-  VariantProps<typeof formLabelVariants>
+  VariantProps<typeof formLabelVariants> &
+  Pick<VariantProps<typeof labelVariants>, 'color'>
 
 export type FormDescriptionProps = React.HTMLAttributes<HTMLParagraphElement> & 
   VariantProps<typeof formDescriptionVariants>
