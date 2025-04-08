@@ -7,6 +7,7 @@ import { SearchInput } from './search-input';
 import { FiltersDropdown } from './filters-dropdown';
 import { SortableHeader } from '@/components/common/table/sortable-header';
 import { Load } from '@/types/load';
+import { LoadActionDialog } from './load-action-dialog';
 
 const TABLE_COLUMNS: { key: keyof Load; label: string }[] = [
   { key: 'id', label: 'Load ID' },
@@ -50,6 +51,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
       <div className='p-4 flex items-center justify-between'>
         <SearchInput />
         <FiltersDropdown />
+        <LoadActionDialog />
       </div>
       
       <div className='overflow-x-auto'>
