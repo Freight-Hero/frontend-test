@@ -3,7 +3,9 @@ import { Dialog, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import { PlusIcon } from 'lucide-react';
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
+
+import { loadFormSchema } from './schemas';
+import { FormValues } from './types';
 
 import { Button } from '@/components/ui/button';
 import { DialogContent, DialogHeader } from '@/components/ui/dialog';
@@ -14,24 +16,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useLoadsContext } from '@/contexts/loads-context';
 import { Load } from '@/types/load';
 
-const formSchema = z.object({
-  status: z.enum(['pick up', 'in route', 'delivered'], {
-    required_error: 'Please select a status',
-  }),
-  origin: z.string().min(1, 'Origin is required'),
-  destination: z.string().min(1, 'Destination is required'),
-  client_name: z.string().min(1, 'Client name is required'),
-  carrier_name: z.string().min(1, 'Carrier name is required'),
-});
 
-type FormValues = z.infer<typeof formSchema>;
+
+
 
 export const LoadActionDialog: FC = () => {
   const { loads, setLoads } = useLoadsContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const form = useForm<FormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(loadFormSchema),
     defaultValues: {
       status: 'pick up',
       origin: '',
