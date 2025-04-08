@@ -55,8 +55,8 @@ export const LoadActionDialog: FC<LoadActionDialogProps> = ({ onSubmit }) => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add New Load</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className='text-2xl font-bold'>Add New Load</DialogTitle>
+          <DialogDescription className='text-sm text-gray-500'>
             Fill in the details below to create a new load.
           </DialogDescription>
         </DialogHeader>
@@ -140,7 +140,7 @@ export const LoadActionDialog: FC<LoadActionDialogProps> = ({ onSubmit }) => {
               <Button type="button" variant="outline" onClick={() => form.reset()}>
                 Cancel
               </Button>
-              <Button type="submit">Create Load</Button>
+              <Button type="submit" variant="cta">Create Load</Button>
             </div>
           </form>
         </Form>
