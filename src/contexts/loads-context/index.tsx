@@ -25,6 +25,7 @@ const LoadsContext = createContext<LoadsContextProps>({
   setSearchQuery: () => {},
   sortConfig: { key: 'id', direction: 'asc' },
   handleSort: () => {},
+  setLoads: () => {},
 })
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
@@ -83,8 +84,9 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
       setSearchQuery,
       sortConfig,
       handleSort,
+      setLoads,
     }),
-    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig]
+    [sortedLoads, isLoading, error, currentPage, totalPages, paginatedLoads, searchQuery, sortConfig, setLoads]
   )
 
   return (

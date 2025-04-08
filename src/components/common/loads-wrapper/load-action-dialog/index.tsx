@@ -1,7 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dialog, DialogDescription, DialogTitle } from '@radix-ui/react-dialog';
 import { PlusIcon } from 'lucide-react';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -11,6 +11,8 @@ import { DialogTrigger } from '@/components/ui/dialog';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useLoadsContext } from '@/contexts/loads-context';
+import { Load } from '@/types/load';
 
 const formSchema = z.object({
   status: z.enum(['pick up', 'in route', 'delivered'], {
@@ -24,11 +26,10 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
-interface LoadActionDialogProps {
-  onSubmit: (values: FormValues) => void;
-}
+export const LoadActionDialog: FC = () => {
+  const { loads, setLoads } = useLoadsContext();
+  const [open, setOpen] = useState(false);
 
-export const LoadActionDialog: FC<LoadActionDialogProps> = ({ onSubmit }) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -41,12 +42,21 @@ export const LoadActionDialog: FC<LoadActionDialogProps> = ({ onSubmit }) => {
   });
 
   const handleSubmit = (values: FormValues) => {
-    onSubmit(values);
+    // Generate a new ID by finding the highest existing ID and adding 1
+    const newId = Math.max(...loads.map(load => load.id), 0) + 1;
+    
+    const newLoad: Load = {
+      id: newId,
+      ...values,
+    };
+
+    setLoads(prevLoads => [newLoad, ...prevLoads]);
     form.reset();
+    setOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="cta">
           <PlusIcon className="mr-2 h-4 w-4" />
@@ -137,7 +147,10 @@ export const LoadActionDialog: FC<LoadActionDialogProps> = ({ onSubmit }) => {
               )}
             />
             <div className="flex justify-end space-x-2">
-              <Button type="button" variant="outline" onClick={() => form.reset()}>
+              <Button type="button" variant="outline" onClick={() => {
+                form.reset();
+                setOpen(false);
+              }}>
                 Cancel
               </Button>
               <Button type="submit" variant="cta">Create Load</Button>

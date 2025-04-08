@@ -14,4 +14,5 @@ export interface LoadsContextProps {
   setSearchQuery: (query: string) => void;
   sortConfig: SortConfig<Load>;
   handleSort: (key: keyof Load) => void;
+  setLoads: (loads: Load[] | ((prevLoads: Load[]) => Load[])) => void;
 } 
