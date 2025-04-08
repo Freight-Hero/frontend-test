@@ -1,14 +1,6 @@
 import { ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/tailwind/cn'
-import { SortConfig } from '@/types/sorting'
-
-interface SortableHeaderProps<T> {
-  label: string
-  sortKey: keyof T
-  sortConfig: SortConfig<T>
-  onSort: (key: keyof T) => void
-  className?: string
-}
+import { SortableHeaderProps } from './types'
 
 export const SortableHeader = <T,>({
   label,
@@ -17,7 +9,7 @@ export const SortableHeader = <T,>({
   onSort,
   className,
 }: SortableHeaderProps<T>) => {
-  const isSorted = sortConfig.key === sortKey
+    const isSorted = sortConfig.key === sortKey
 
   return (
     <th

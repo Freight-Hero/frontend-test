@@ -5,7 +5,7 @@ import { LoadsWrapperProps } from './types';
 import { LoadStatusBadge } from '@/components/ui/load-status-badge';
 import { SearchInput } from './search-input';
 import { FiltersDropdown } from './filters-dropdown';
-import { SortableHeader } from '@/components/ui/table/sortable-header';
+import { SortableHeader } from '@/components/common/table/sortable-header';
 import { Load } from '@/types/load';
 
 const TABLE_COLUMNS: { key: keyof Load; label: string }[] = [

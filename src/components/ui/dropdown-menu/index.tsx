@@ -16,8 +16,6 @@ import {
   dropdownMenuShortcutVariants,
 } from "./variants"
 import type {
-  DropdownMenuProps,
-  DropdownMenuTriggerProps,
   DropdownMenuContentProps,
   DropdownMenuItemProps,
   DropdownMenuCheckboxItemProps,
