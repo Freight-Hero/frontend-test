@@ -7,7 +7,11 @@ export default {
   content: [join(__dirname, 'src/**/*.tsx')],
   theme: {
     /** We had some tokens here but I didn't find CSS variables for them. Review this. */
-    extend: {}
+    extend: {
+      fontFamily: {
+        'hanken-grotesk': ['Hanken Grotesk', 'sans-serif'],
+      }
+    }
   },
   plugins: []
 };
