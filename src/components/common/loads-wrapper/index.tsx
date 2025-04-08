@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { LoadsWrapperProps } from './types';
 import { useLoadsContext } from '@/contexts/loads-context';
 import { LoadStatusBadge } from '@/components/ui/load-status-badge';
-import { Input } from '@/components/ui/InputRename';
+import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ListFilter, Search } from 'lucide-react';
 export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
