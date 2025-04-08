@@ -5,7 +5,7 @@ import { join } from 'node:path';
  */
 export default {
 	darkMode: ['class'],
-	content: [join(__dirname, 'src/**/*.tsx')],
+	content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
   	extend: {
   		fontFamily: {
