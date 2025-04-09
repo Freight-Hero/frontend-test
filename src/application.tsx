@@ -1,7 +1,8 @@
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import { createRoot } from 'react-dom/client';
 import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 
+import { LoadsContextProvider } from './contexts/loads-context';
 import { SplashScreen } from './screens/splash';
 
 import './application.css';
@@ -18,6 +19,8 @@ const browserRouter = createBrowserRouter([
 
 root.render(
   <StrictMode>
-    <RouterProvider router={browserRouter} />
+    <LoadsContextProvider>
+      <RouterProvider router={browserRouter} />
+    </LoadsContextProvider>
   </StrictMode>
 );
