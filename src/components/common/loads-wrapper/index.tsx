@@ -48,8 +48,8 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
 
   return (
     <div className='bg-white rounded-sm border border-slate-100 w-full overflow-hidden flex flex-col gap-4'>
-      <div className='p-4 flex items-center justify-between'>
-        <div className="flex gap-4">
+      <div className='p-4 flex items-center justify-between flex-wrap gap-4'>
+        <div className="flex sm:gap-4 gap-2 flex-col sm:flex-row flex-1">
           <SearchInput />
           <FiltersDropdown />
         </div>
@@ -67,7 +67,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
                   sortKey={column.key}
                   sortConfig={sortConfig}
                   onSort={handleSort}
-                  className='text-left py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'
+                  className='text-left whitespace-nowrap py-3 px-4 text-sm font-medium text-slate-500 uppercase tracking-wider'
                 />
               ))}
             </tr>
@@ -79,14 +79,14 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
                 className='hover:bg-slate-50 cursor-pointer'
                 onClick={() => setSelectedLoad(load)}
               >
-                <td className='py-4 px-4 text-sm text-slate-900 font-medium'>{load.id}</td>
-                <td className='py-4 px-4'>
+                <td className='py-2 md:py-4 px-4 text-sm text-slate-900 font-medium whitespace-nowrap'>{load.id}</td>
+                <td className='py-2 md:py-4 px-4 whitespace-nowrap'>
                   <LoadStatusBadge status={load.status} />
                 </td>
-                <td className='py-4 px-4 text-sm text-slate-600'>{load.origin}</td>
-                <td className='py-4 px-4 text-sm text-slate-600'>{load.destination}</td>
-                <td className='py-4 px-4 text-sm text-slate-600'>{load.client_name}</td>
-                <td className='py-4 px-4 text-sm text-slate-600'>{load.carrier_name}</td>
+                <td className='py-2 md:py-4 px-4 text-sm text-slate-600 whitespace-nowrap max-w-[200px] overflow-hidden text-ellipsis'>{load.origin}</td>
+                <td className='py-2 md:py-4 px-4 text-sm text-slate-600 whitespace-nowrap max-w-[200px] overflow-hidden text-ellipsis'>{load.destination}</td>
+                <td className='py-2 md:py-4 px-4 text-sm text-slate-600 whitespace-nowrap max-w-[200px] overflow-hidden text-ellipsis'>{load.client_name}</td>
+                <td className='py-2 md:py-4 px-4 text-sm text-slate-600 whitespace-nowrap max-w-[200px] overflow-hidden text-ellipsis'>{load.carrier_name}</td>
               </tr>
             ))}
           </tbody>

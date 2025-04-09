@@ -61,7 +61,7 @@ export const LoadFormDialog: FC<LoadFormDialogProps> = ({
         {mode === 'create' && (
           <DialogTrigger asChild>
             <Button variant="cta">
-              <PlusIcon className="mr-2 h-4 w-4" />
+              <PlusIcon className="h-4 w-4" />
               Add Load
             </Button>
           </DialogTrigger>

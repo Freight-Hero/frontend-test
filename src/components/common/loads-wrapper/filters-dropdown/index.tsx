@@ -14,9 +14,9 @@ export const FiltersDropdown = () => {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-2 w-full">
       <Select value={statusFilter} onValueChange={handleFilterChange}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="md:w-[180px] w-full">
           <SelectValue className="text-sm" placeholder="Filter by status" />
         </SelectTrigger>
         <SelectContent>

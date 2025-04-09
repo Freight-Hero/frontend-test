@@ -33,6 +33,8 @@ const LoadsContext = createContext<LoadsContextProps>({
 
 export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { loads, isLoading, error, setLoads } = useLoadsData()
+
+  // TODO: We can improve this merging the state and the actions into a single state.
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
