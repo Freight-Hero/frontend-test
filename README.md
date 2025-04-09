@@ -1,59 +1,94 @@
-# Freight Hero - Frontend test
+# Load Management System
 
-Your mission is to develop a load management UI, this test is intended to let us know more about your frontend skills, critical thinking, and creativity. Please read carefully the instructions down below and good luck! 🙏
+A modern and efficient load management system built with React, TypeScript, and Tailwind CSS.
 
-## Context
+## Features
 
-Freight Hero is a company that provides load management services leveraging the power of AI to automate repetitive tasks and ensure processes involving brokerage are going smoothly.
+- **Load Management**
+  - Create, Read, Update, and Delete (CRUD) operations for loads
+  - Real-time data updates
+  - Efficient state management using React Context
+  - Async data fetching with simulated API delay for realistic development experience
 
-- **Load** is a common term in the brokerage market to specify what you are transporting.
-- **Client** is the company expecting to receive the load.
-- **Carrier** is the company in charge of transporting the load.
-- **Destination** is the physical place where the load needs to be delivered.
-- **Origin** is the physical place where a load needs to be picked up.
-- **Status** is used to determine whether a load needs to be picked up, is in transit, or was delivered.
+- **Data Visualization**
+  - Clean and responsive table layout
+  - Pagination for better performance
+  - Column sorting functionality
+  - Search functionality for quick data access
+  - Status filtering for better organization
 
-## Requirements
+- **User Experience**
+  - Responsive design for desktop-first experience with mobile compatibility
+  - Skeleton loading states for better perceived performance
+  - Accessible components following WCAG guidelines
+  - Intuitive navigation and interactions
+  - Focus feedback for keyboard navigation
 
-- Using the [mocked json](./public/loads-mock.json), build a load management UI.
+## Technical Decisions
 
-  - Fetch the JSON file as if it were from a [real server](http://localhost:3000/loads-mock.json) and use the proper loading states.
-  - Include search and filters at the top of the page for all columns.
-  - Display the loaded data in a clear and organized table.
+### Architecture
+- **State Management**: Used React Context API for its simplicity and efficiency, avoiding unnecessary complexity of external state management libraries
+- **Component Structure**: Modular architecture with reusable components for better maintainability and scalability
+- **Code Organization**: Clear folder structure following best practices for React applications
+- **Data Fetching**: Implemented async data fetching with simulated delay to mimic real-world API behavior
 
-- Include a delete action at the right side of each row using a menu.
+### UI/UX
+- **Styling**: Implemented Tailwind CSS with shadcn components for consistent design and optimal performance
+- **Responsiveness**: Desktop-first approach with responsive layouts for mobile compatibility
+- **Accessibility**: Built with accessibility in mind, following WCAG guidelines
+- **Performance**: Optimized loading states and efficient data handling
 
-  - The delete action must have confirmation modal.
-  - Once an item is deleted, it must not appear in the table anymore.
+### Code Quality
+- **TypeScript**: Strong typing for better code reliability and developer experience
+- **ESLint**: Strict linting rules to maintain code quality and consistency
+- **Modularity**: Components and features are well-separated for better maintainability
 
-- Implement a modal to create loads.
+## Getting Started
 
-  - Use the same fields you find in the mocked JSON to create the form.
-  - The fields must have validation and all of them are required.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## Going Above and Beyond
+## Future Improvements
 
-- Enhance the UI with a modern theme and components.
-- Use visually appealing components without disrupting UX.
-- Have proper error handling so as not to affect the UI badly.
-- Use your creativity to improve the proposed items above.
+### Technical Enhancements
+- Implement comprehensive testing strategy (unit, integration, and E2E tests)
+- Add error boundaries for better error handling
+- Implement data persistence layer
+- Add offline support capabilities
+- Add proper API error handling and retry mechanisms
 
-## Getting Set Up
+### Feature Additions
+- Advanced filtering options
+- Export functionality for load data
+- Bulk operations for loads
+- User authentication and authorization
+- Role-based access control
+- Audit logging for load changes
+- Advanced search with multiple criteria
+- Data visualization charts and graphs
 
-#### Install
+### Performance Optimizations
+- Implement virtual scrolling for large datasets
+- Add data caching strategies
+- Optimize bundle size
+- Implement code splitting
+- Add service worker for offline capabilities
+- Optimize API calls with debouncing and caching
 
-```sh
-npm install
-```
+### UI/UX Improvements
+- Dark mode support
+- Customizable table views
+- Drag-and-drop functionality
+- Keyboard shortcuts
+- Advanced filtering UI
+- Customizable dashboard
+- Enhanced mobile experience
+- Loading state improvements with progress indicators
 
-#### Run
-
-```sh
-npm run serve
-```
-
-## Submitting
-
-Once your test is done share it using the specified channel within your invitation email or ask the tech recruiter for more details.
-
-Thank you.
