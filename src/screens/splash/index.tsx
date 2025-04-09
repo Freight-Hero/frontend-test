@@ -10,7 +10,9 @@ export const SplashScreen: React.FC<SplashScreenProps> = () => {
     <div className="px-4">
       <div className="bg-slate-100 w-full min-h-screen flex flex-col items-center py-12 max-w-screen-lg mx-auto gap-12">
         <div className='flex flex-col items-center justify-center gap-1.5'>
-          <img src={logo} alt="Freight Hero" className='w-48' />
+          <a href="https://www.freighthero.ai/" target="_blank" rel="noopener noreferrer">
+            <img src={logo} alt="Freight Hero" className='w-48' />
+          </a>
           <p className='text-slate-500 text-sm font-extralight'>load management</p>
         </div>
         <LoadsWrapper />
