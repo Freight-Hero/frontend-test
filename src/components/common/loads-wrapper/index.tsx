@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import { CreateLoadDialog } from './create-load-dialog';
 import { FiltersDropdown } from './filters-dropdown';
 import { LoadActionDialog } from './load-action-dialog';
+import { LoadsWrapperSkeleton } from './loads-wrapper-skeleton';
 import { SearchInput } from './search-input';
 import { LoadsWrapperProps } from './types';
 
@@ -34,44 +35,7 @@ export const LoadsWrapper: FC<LoadsWrapperProps> = () => {
   const [selectedLoad, setSelectedLoad] = useState<Load | null>(null);
 
   if (isLoading) {
-    return (
-      <div className='bg-white rounded-sm border border-slate-100 w-full p-6'>
-        <div className='animate-pulse space-y-8'>
-          {/* Search and Filter Bar */}
-          <div className='flex items-center justify-between'>
-            <div className='flex gap-2'>
-              <div className='h-9 bg-slate-200 rounded-sm w-[240px]'></div>
-              <div className='h-9 bg-slate-200 rounded-sm w-[180px]'></div>
-            </div>
-            <div className='h-9 bg-slate-200 rounded-sm w-[120px]'></div>
-          </div>
-
-          {/* Table Header */}
-          <div className='flex items-center gap-6 border-b pb-4'>
-            <div className='h-4 bg-slate-200 rounded w-[100px]'></div>
-            <div className='h-4 bg-slate-200 rounded w-[100px]'></div>
-            <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-            <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-            <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-            <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-          </div>
-
-          {/* Table Rows */}
-          <div className='space-y-6'>
-            {[1, 2, 3, 4, 5].map((index) => (
-              <div key={index} className='flex items-center gap-6'>
-                <div className='h-4 bg-slate-200 rounded w-[100px]'></div>
-                <div className='h-6 bg-slate-200 rounded w-[80px]'></div>
-                <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-                <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-                <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-                <div className='h-4 bg-slate-200 rounded w-[150px]'></div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    );
+    return <LoadsWrapperSkeleton />;
   }
 
   if (error) {
