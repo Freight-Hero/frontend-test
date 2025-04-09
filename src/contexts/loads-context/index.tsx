@@ -38,7 +38,7 @@ export const LoadsContextProvider: React.FC<PropsWithChildren> = ({ children }) 
   const [currentPage, setCurrentPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState('')
-  const [sortConfig, setSortConfig] = useState<SortConfig<Load>>({ key: 'id', direction: 'asc' })
+  const [sortConfig, setSortConfig] = useState<SortConfig<Load>>({ key: 'id', direction: 'desc' })
 
   const deleteLoad = (id: number) => {
     setLoads(prevLoads => prevLoads.filter(load => load.id !== id))
